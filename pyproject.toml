@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "serial-depth"
+version = "0.1.0"
+description = "A library for computing the serial depth of JAX computations"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "David Lindner", email = "dlindner@google.com"},
+    {name = "Jonah Brown-Cohen", email = "jonahbc@google.com"},
+]
+keywords = ["jax", "neural networks", "serial depth", "computation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "jax>=0.4.0",
+    "numpy>=1.21.0",
+    "flax>=0.7.0",
+    "gemma>=3.2.1",
+]
+
+[project.optional-dependencies]
+examples = [
+    "flax>=0.7.0",
+    "absl-py>=1.0.0",
+    # Note: gemma may not be available on PyPI - remove if needed
+    # "gemma>=0.1.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["serial_depth*"]
+exclude = ["examples*"]
+
+[project.urls]
+Homepage = "https://github.com/deepmind/serial_depth"
+Repository = "https://github.com/deepmind/serial_depth"
+Issues = "https://github.com/deepmind/serial_depth/issues"
+
+[tool.setuptools.package-data]
+serial_depth = ["py.typed"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
